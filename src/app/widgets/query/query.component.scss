@@ -1,0 +1,15 @@
+.container form {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+input {
+  padding-right: 24px;
+}
+
+.clear {
+  position: absolute;
+  right: 6px;
+  color: #D9078C;
+}

@@ -1,13 +1,16 @@
-import { Directive, ElementRef, EventEmitter, HostListener, Input, Output } from '@angular/core';
+import { Directive, ElementRef, EventEmitter, HostListener, Input, OnDestroy, Output } from '@angular/core';
 
 import { UtilService } from '../services/util.service';
+import { interval, Subject } from 'rxjs';
+import { take, takeUntil } from 'rxjs/operators';
 
 @Directive({
   selector: '[topSearch]',
 })
-export class SearchDirective {
+export class SearchDirective implements OnDestroy {
 
-  private searchByNameTimer: any;
+  willBeClosed = new Subject();
+  input$ = new Subject();
 
   private isSearch = false;
 
@@ -18,6 +21,7 @@ export class SearchDirective {
 
   @Output() onLessThanMin = new EventEmitter<any>();
   @Output() onSearch = new EventEmitter<any>();
+  @Output() onMoreThanMin = new EventEmitter();
 
   @Input() onLessThanMinPromise: () => Promise<any>;
   @Input() onSearchPromise: (text: string) => Promise<any>;
@@ -40,22 +44,29 @@ export class SearchDirective {
   }
 
   @HostListener('input') onInput() {
-    if (this.searchByNameTimer) {
-      clearTimeout(this.searchByNameTimer);
-    }
-    this.searchByNameTimer = setTimeout(() => {
+    this.input$.next();
 
-      if (this.element.nativeElement.value.length >= this.minCharCount) {
-        this.isSearch = true;
-        this.searchBehavior(this.onSearchPromise, this.onSearch);
-      } else {
-        if (this.isSearch) {
-          this.isSearch = false;
-          this.searchBehavior(this.onLessThanMinPromise, this.onLessThanMin);
+    interval(this.delay)
+      .pipe(take(1), takeUntil(this.willBeClosed), takeUntil(this.input$))
+      .subscribe(() => {
+        if (this.element.nativeElement.value.length >= this.minCharCount) {
+          this.isSearch = true;
+          this.onMoreThanMin.emit();
+          this.searchBehavior(this.onSearchPromise, this.onSearch);
+        } else {
+          if (this.isSearch) {
+            this.isSearch = false;
+            this.searchBehavior(this.onLessThanMinPromise, this.onLessThanMin);
+          }
         }
-      }
+      });
+  }
 
-    }, this.delay);
+  ngOnDestroy(): void {
+    this.willBeClosed.next();
+    this.willBeClosed.complete();
+
+    this.input$.complete();
   }
 
 }

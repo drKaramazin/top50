@@ -1,6 +1,18 @@
+input, textarea {
+  outline: none;
+}
+
 input {
-  border: 2px solid #DF05F0;
+  border: 2px solid #0B858C;
   padding: 6px 10px;
   border-radius: 4px;
   font-size: medium;
+}
+
+input:focus {
+  border: 2px solid #169EA6;
+}
+
+input.has-error {
+  border: 2px solid #BF3322;
 }

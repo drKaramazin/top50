@@ -1,0 +1,11 @@
+<div class="container">
+  <form [formGroup]="form">
+    <input topSearch
+           [ngClass]="{ 'has-error': form.controls.query.invalid }"
+           formControlName="query"
+           (onSearch)="search($event)"
+           (onMoreThanMin)="showClearButton()"
+           (onLessThanMin)="clearSearch()">
+    <a class="fas fa-times-circle clear" (click)="clearQuery()" *ngIf="isClearBtnShowed"></a>
+  </form>
+</div>

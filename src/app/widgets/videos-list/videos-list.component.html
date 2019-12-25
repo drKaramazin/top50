@@ -1,22 +1,21 @@
 <top-panel>
-  <input topSearch
-         (onSearch)="search($event)"
-         (onLessThanMin)="clearSearch()">
+  Search &nbsp;
+  <top-query (onSearch)="resultHolder($event)" (onClear)="getTopVideos()"></top-query>
 </top-panel>
 
 <top-panel direction="column">
-  <div *ngFor="let video of result?.items" class="item">
-    <div [ngStyle]="{ 'width.px': video.snippet.thumbnails.default.width }">
-      <img [src]="video.snippet.thumbnails.default.url">
+    <div *ngFor="let video of items" class="item">
+      <div [ngStyle]="{ 'width.px': video.snippet.thumbnails.default.width }">
+        <img [src]="video.snippet.thumbnails.default.url">
+      </div>
+      <div class="snippet">
+        <div class="title">{{ video.snippet.title }}</div>
+        <div class="channel-title">{{ video.snippet.channelTitle }}</div>
+        <div class="description">{{ video.snippet.description }}</div>
+      </div>
     </div>
-    <div class="snippet">
-      <div class="title">{{ video.snippet.title }}</div>
-      <div class="channel-title">{{ video.snippet.channelTitle }}</div>
-      <div class="description">{{ video.snippet.description }}</div>
-    </div>
-  </div>
 </top-panel>
 
 <top-panel [centered]="true">
-  <a class="action" *ngIf="result?.nextPageToken" (click)="next()">Load more...</a>
+  <a class="action" *ngIf="nextPageToken" (click)="next()">Load more...</a>
 </top-panel>

@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, APP_INITIALIZER } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 
@@ -16,6 +17,7 @@ import { VideosComponent } from './pages/videos/videos.component';
 
 import { SearchDirective } from './directives/search.directive';
 import { PanelComponent } from './widgets/panel/panel.component';
+import { QueryComponent } from './widgets/query/query.component';
 
 @NgModule({
   declarations: [
@@ -24,11 +26,13 @@ import { PanelComponent } from './widgets/panel/panel.component';
     VideosComponent,
     SearchDirective,
     PanelComponent,
+    QueryComponent,
   ],
   imports: [
     CommonModule,
     BrowserModule,
     AppRoutingModule,
+    ReactiveFormsModule,
   ],
   providers: [
     {
