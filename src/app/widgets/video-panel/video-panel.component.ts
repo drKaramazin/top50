@@ -2,6 +2,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { SearchResult } from '../../models/search-result';
 import { Video } from '../../models/youtube/video';
 import { YouTubeService } from '../../services/you-tube.service';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'top-video-panel',
@@ -16,6 +17,8 @@ export class VideoPanelComponent implements OnInit {
   isShowFavorites = false;
 
   items: Video[] = [];
+
+  loading = new BehaviorSubject<boolean>(false);
 
   constructor(
     private youtube: YouTubeService,
@@ -33,23 +36,29 @@ export class VideoPanelComponent implements OnInit {
   }
 
   showFavorites() {
-    this.isShowFavorites = true;
-    this.youtube.getFavorites().then(resp => this.items = resp.items);
+    if (!this.loading.value) {
+      this.isShowFavorites = true;
+      this.loading.next(true);
+      this.youtube.getFavorites().then(resp => {
+        this.items = resp.items;
+        this.loading.next(false);
+      });
+    }
   }
 
   hideFavorites() {
-    this.isShowFavorites = false;
+    if (!this.loading.value) {
+      this.isShowFavorites = false;
+    }
   }
 
   removeFromFavorites(id: string) {
-    console.log(id, this.items);
     this.items = this.items.reduce((accum, video) => {
       if (video.id !== id) {
         accum.push(video);
       }
       return accum;
     }, []);
-    console.log(this.items);
   }
 
 }

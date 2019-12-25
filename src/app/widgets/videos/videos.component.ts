@@ -26,7 +26,6 @@ export class VideosComponent implements OnInit {
   ) { }
 
   resultHolder(result: Result) {
-    console.log(result);
     this.items = result.items;
     this.nextPageToken = result.nextPageToken;
     this.loading.next(false);

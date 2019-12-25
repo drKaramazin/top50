@@ -3,6 +3,11 @@ a {
   cursor: pointer;
 }
 
+a.disabled {
+  color: #04638F;
+  cursor: no-drop;
+}
+
 .action {
   padding: 6px 10px;
   border-radius: 4px;
@@ -16,6 +21,7 @@ a {
 
 .action.disabled {
   background: #04638F;
+  color: #fff;
 }
 
 .action.flip {

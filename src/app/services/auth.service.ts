@@ -15,10 +15,8 @@ export class AuthService {
   isAuthorized = new BehaviorSubject<boolean>(false);
 
   setSigninStatus() {
-    console.log('wow');
     const user = this.googleAuth.value.currentUser.get();
     this.isAuthorized.next(user.hasGrantedScopes(this.SCOPE));
-    console.log(this.isAuthorized.value);
   }
 
   updateSigninStatus() {
