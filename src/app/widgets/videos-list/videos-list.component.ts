@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { YouTubeService } from '../../services/you-tube.service';
-import { Video } from '../../models/youtube/video';
+import { Result } from '../../models/youtube/result';
 
 @Component({
   selector: 'top-videos-list',
@@ -10,14 +10,34 @@ import { Video } from '../../models/youtube/video';
 })
 export class VideosListComponent implements OnInit {
 
-  videos: Video[];
+  result: Result;
+
+  q = 'Christmas';
 
   constructor(
     private youtube: YouTubeService,
   ) { }
 
   ngOnInit() {
-    this.youtube.getTopVideos().then(resp => this.videos = resp.items);
+    this.youtube.searchVideos(this.q).then(resp => {
+      this.result = resp;
+      console.log(resp);
+    });
+  }
+
+  next() {
+    this.youtube.searchVideos(this.q, this.result.nextPageToken).then(resp => {
+      this.result = resp;
+      console.log(resp);
+    });
+  }
+
+  search(query: string) {
+    console.log(query);
+  }
+
+  clearSearch() {
+    console.log('Clear');
   }
 
 }

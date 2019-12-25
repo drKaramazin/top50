@@ -1,7 +1,24 @@
-table {
-  width: 100%;
+.item {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 10px;
+  align-items: center;
 }
 
-td {
-  vertical-align: middle;
+.snippet {
+  margin-left: 20px;
+}
+
+.title {
+  margin-bottom: 10px;
+}
+
+.channel-title {
+  margin-bottom: 10px;
+  color: #9805E6;
+  font-size: medium;
+}
+
+.description {
+  font-size: small;
 }

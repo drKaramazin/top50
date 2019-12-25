@@ -11,13 +11,38 @@ export class YouTubeService {
 
   constructor() { }
 
-  getTopVideos(): Promise<Result> {
+  getTopVideos(pageToken?: string): Promise<Result> {
+    const options: {[key: string]: string} = {
+      part: 'snippet',
+      chart: 'mostPopular',
+      maxResults: '50',
+    };
+
+    if (pageToken) {
+      options.pageToken = pageToken;
+    }
+
     return new Promise((resolve, reject) => {
-      gapi.client.youtube.videos.list({
-        part: 'snippet,contentDetails,statistics',
-        chart: 'mostPopular',
-        maxResults: '50',
-      }).then((resp) => resolve(resp.result), (reason) => reject(reason));
+      gapi.client.youtube.videos.list(options)
+        .then((resp) => resolve(resp.result), (reason) => reject(reason));
+    });
+  }
+
+  searchVideos(query: string, pageToken?: string): Promise<Result> {
+    const options: {[key: string]: string} = {
+      part: 'snippet',
+      maxResults: '50',
+      q: query,
+      type: 'video',
+    };
+
+    if (pageToken) {
+      options.pageToken = pageToken;
+    }
+
+    return new Promise<Result>((resolve, reject) => {
+      gapi.client.youtube.search.list(options)
+        .then((resp) => resolve(resp.result), (reason) => reject(reason));
     });
   }
 
