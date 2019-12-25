@@ -1,0 +1,9 @@
+<table>
+  <tr *ngFor="let video of videos">
+    <td>{{ video.snippet.title }}</td>
+    <td>{{ video.snippet.channelTitle }}</td>
+    <td [ngStyle]="{ 'width.px': video.snippet.thumbnails.default.width }">
+      <img [src]="video.snippet.thumbnails.default.url">
+    </td>
+  </tr>
+</table>
