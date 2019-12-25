@@ -29,7 +29,7 @@ export class QueryComponent implements OnInit {
   }
 
   search(query: string) {
-    this.youtube.searchVideos(query).then(resp => this.onSearch.emit({ result: resp, query: this.form.controls.query.value }));
+    this.youtube.search(query).then(resp => this.onSearch.emit({ result: resp, query: this.form.controls.query.value }));
   }
 
   showClearButton() {

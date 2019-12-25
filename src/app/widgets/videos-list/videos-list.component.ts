@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 import { Video } from '../../models/youtube/video';
 import { FavoritesService } from '../../services/favorites.service';
@@ -9,6 +9,8 @@ import { FavoritesService } from '../../services/favorites.service';
   styleUrls: ['./videos-list.component.scss']
 })
 export class VideosListComponent implements OnInit {
+
+  @Output() onRemoveFromFavorites = new EventEmitter<string>();
 
   @Input() items: Video[];
 
@@ -25,6 +27,7 @@ export class VideosListComponent implements OnInit {
 
   removeFromFavorites(video: Video) {
     this.favorites.delete(video.id);
+    this.onRemoveFromFavorites.emit(video.id);
   }
 
 }

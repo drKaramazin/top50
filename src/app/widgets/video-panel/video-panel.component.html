@@ -1,6 +1,11 @@
-<top-panel *ngIf="isShowFavorites; else favoriteTmp">
-  <a (click)="hideFavorites()"><i class="fas fa-eye-slash"></i> hide favorites</a>
-</top-panel>
+<ng-container *ngIf="isShowFavorites; else favoriteTmp">
+  <top-panel>
+    <a (click)="hideFavorites()"><i class="fas fa-eye-slash"></i> hide favorites</a>
+  </top-panel>
+
+  <top-videos-list [items]="items" (onRemoveFromFavorites)="removeFromFavorites($event)"></top-videos-list>
+</ng-container>
+
 <ng-template #favoriteTmp>
   <top-panel>
     Search &nbsp;
@@ -8,6 +13,5 @@
     &nbsp;or&nbsp;
     <a (click)="showFavorites()"><i class="fas fa-eye"></i> show favorites</a>
   </top-panel>
+  <ng-content></ng-content>
 </ng-template>
-
-<ng-content></ng-content>

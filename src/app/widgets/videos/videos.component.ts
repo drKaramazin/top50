@@ -34,7 +34,7 @@ export class VideosComponent implements OnInit {
 
   getTopVideos() {
     this.loading.next(true);
-    this.youtube.getTopVideos()
+    this.youtube.getTop()
       .then(resp => this.resultHolder(resp));
   }
 
@@ -52,8 +52,8 @@ export class VideosComponent implements OnInit {
     if (!this.loading.value) {
       this.loading.next(true);
 
-      const promise: Promise<Result> = this.query.value ? this.youtube.searchVideos(this.query.value, this.nextPageToken)
-        : this.youtube.getTopVideos(this.nextPageToken);
+      const promise: Promise<Result> = this.query.value ? this.youtube.search(this.query.value, this.nextPageToken)
+        : this.youtube.getTop(this.nextPageToken);
 
       promise.then(resp => this.nextHolder(resp));
     }
