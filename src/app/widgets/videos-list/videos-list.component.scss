@@ -14,6 +14,7 @@
 
 .snippet {
   margin-left: 20px;
+  width: 100%;
 }
 
 .title {
@@ -28,4 +29,11 @@
 
 .description {
   font-size: small;
+}
+
+.favorites {
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  flex-direction: row;
 }

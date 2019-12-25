@@ -10,6 +10,7 @@ import { appInitializer } from './app-initializer';
 import { AuthService } from './services/auth.service';
 import { YouTubeService } from './services/you-tube.service';
 import { UtilService } from './services/util.service';
+import { FavoritesService } from './services/favorites.service';
 
 import { AppComponent } from './app.component';
 import { VideosListComponent } from './widgets/videos-list/videos-list.component';
@@ -18,6 +19,7 @@ import { VideosComponent } from './pages/videos/videos.component';
 import { SearchDirective } from './directives/search.directive';
 import { PanelComponent } from './widgets/panel/panel.component';
 import { QueryComponent } from './widgets/query/query.component';
+import { SearchInFavoritesPipe } from './pipes/search-in-favorites.pipe';
 
 @NgModule({
   declarations: [
@@ -27,6 +29,7 @@ import { QueryComponent } from './widgets/query/query.component';
     SearchDirective,
     PanelComponent,
     QueryComponent,
+    SearchInFavoritesPipe,
   ],
   imports: [
     CommonModule,
@@ -44,6 +47,7 @@ import { QueryComponent } from './widgets/query/query.component';
     AuthService,
     YouTubeService,
     UtilService,
+    FavoritesService,
   ],
   bootstrap: [AppComponent]
 })

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { YouTubeService } from '../../services/you-tube.service';
+import { FavoritesService } from '../../services/favorites.service';
 import { Result } from '../../models/youtube/result';
 import { Video } from '../../models/youtube/video';
 import { BehaviorSubject } from 'rxjs';
@@ -21,6 +22,7 @@ export class VideosListComponent implements OnInit {
 
   constructor(
     private youtube: YouTubeService,
+    private favorites: FavoritesService,
   ) { }
 
   resultHolder(result: Result) {
@@ -65,6 +67,16 @@ export class VideosListComponent implements OnInit {
   clearSearch() {
     this.query.next(null);
     this.getTopVideos();
+  }
+
+  addToFavorites(video: Video) {
+    this.favorites.add(video.id);
+    console.log(this.favorites.getDataAsArray());
+  }
+
+  removeFromFavorites(video: Video) {
+    this.favorites.delete(video.id);
+    console.log(this.favorites.getDataAsArray());
   }
 
 }

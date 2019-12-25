@@ -12,6 +12,14 @@
         <div class="title">{{ video.snippet.title }}</div>
         <div class="channel-title">{{ video.snippet.channelTitle }}</div>
         <div class="description">{{ video.snippet.description }}</div>
+        <div class="favorites">
+          <a class="action" (click)="addToFavorites(video)" *ngIf="!(video.id | searchInFavorites)">
+            <i class="fas fa-heart"></i> Add to favorites
+          </a>
+          <a class="action flip" (click)="removeFromFavorites(video)" *ngIf="video.id | searchInFavorites">
+            <i class="fas fa-heart-broken"></i> Remove from favorites
+          </a>
+        </div>
       </div>
     </div>
 </top-panel>
