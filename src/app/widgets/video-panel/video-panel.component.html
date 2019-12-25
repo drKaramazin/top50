@@ -1,0 +1,13 @@
+<top-panel *ngIf="isShowFavorites; else favoriteTmp">
+  <a (click)="hideFavorites()"><i class="fas fa-eye-slash"></i> hide favorites</a>
+</top-panel>
+<ng-template #favoriteTmp>
+  <top-panel>
+    Search &nbsp;
+    <top-query (onSearch)="search($event)" (onClear)="clearSearch()"></top-query>
+    &nbsp;or&nbsp;
+    <a (click)="showFavorites()"><i class="fas fa-eye"></i> show favorites</a>
+  </top-panel>
+</ng-template>
+
+<ng-content></ng-content>

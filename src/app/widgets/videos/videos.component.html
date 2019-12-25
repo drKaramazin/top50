@@ -1,0 +1,9 @@
+<top-video-panel (onSearch)="search($event)" (onClearSearch)="clearSearch()">
+
+  <top-videos-list [items]="items"></top-videos-list>
+
+  <top-panel [centered]="true">
+    <a class="action" [ngClass]="{ disabled: loading | async }" *ngIf="nextPageToken" (click)="next()">Load more...</a>
+  </top-panel>
+
+</top-video-panel>

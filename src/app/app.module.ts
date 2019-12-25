@@ -13,23 +13,27 @@ import { UtilService } from './services/util.service';
 import { FavoritesService } from './services/favorites.service';
 
 import { AppComponent } from './app.component';
-import { VideosListComponent } from './widgets/videos-list/videos-list.component';
-import { VideosComponent } from './pages/videos/videos.component';
+import { VideosComponent } from './widgets/videos/videos.component';
+import { HomeComponent } from './pages/home/home.component';
 
 import { SearchDirective } from './directives/search.directive';
 import { PanelComponent } from './widgets/panel/panel.component';
 import { QueryComponent } from './widgets/query/query.component';
 import { SearchInFavoritesPipe } from './pipes/search-in-favorites.pipe';
+import { VideoPanelComponent } from './widgets/video-panel/video-panel.component';
+import { VideosListComponent } from './widgets/videos-list/videos-list.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    VideosListComponent,
+    HomeComponent,
     VideosComponent,
     SearchDirective,
     PanelComponent,
     QueryComponent,
     SearchInFavoritesPipe,
+    VideoPanelComponent,
+    VideosListComponent,
   ],
   imports: [
     CommonModule,

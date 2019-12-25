@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { VideosComponent } from './pages/videos/videos.component';
+import { HomeComponent } from './pages/home/home.component';
 
 const routes: Routes = [
-  { path: '', component: VideosComponent, pathMatch: 'full' },
+  { path: '', component: HomeComponent, pathMatch: 'full' },
 ];
 
 @NgModule({

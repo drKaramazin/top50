@@ -1,29 +1,20 @@
-<top-panel>
-  Search &nbsp;
-  <top-query (onSearch)="search($event)" (onClear)="clearSearch()"></top-query>
-</top-panel>
-
 <top-panel direction="column">
-    <div *ngFor="let video of items" class="item">
-      <div [ngStyle]="{ 'width.px': video.snippet.thumbnails.default.width }">
-        <img [src]="video.snippet.thumbnails.default.url">
-      </div>
-      <div class="snippet">
-        <div class="title">{{ video.snippet.title }}</div>
-        <div class="channel-title">{{ video.snippet.channelTitle }}</div>
-        <div class="description">{{ video.snippet.description }}</div>
-        <div class="favorites">
-          <a class="action" (click)="addToFavorites(video)" *ngIf="!(video.id | searchInFavorites)">
-            <i class="fas fa-heart"></i> Add to favorites
-          </a>
-          <a class="action flip" (click)="removeFromFavorites(video)" *ngIf="video.id | searchInFavorites">
-            <i class="fas fa-heart-broken"></i> Remove from favorites
-          </a>
-        </div>
+  <div *ngFor="let video of items" class="item">
+    <div [ngStyle]="{ 'width.px': video.snippet.thumbnails.default.width }">
+      <img [src]="video.snippet.thumbnails.default.url">
+    </div>
+    <div class="snippet">
+      <div class="title">{{ video.snippet.title }}</div>
+      <div class="channel-title">{{ video.snippet.channelTitle }}</div>
+      <div class="description">{{ video.snippet.description }}</div>
+      <div class="favorites">
+        <a class="action" (click)="addToFavorites(video)" *ngIf="!(video.id | searchInFavorites)">
+          <i class="fas fa-heart"></i> Add to favorites
+        </a>
+        <a class="action flip" (click)="removeFromFavorites(video)" *ngIf="video.id | searchInFavorites">
+          <i class="fas fa-heart-broken"></i> Remove from favorites
+        </a>
       </div>
     </div>
-</top-panel>
-
-<top-panel [centered]="true">
-  <a class="action" [ngClass]="{ disabled: loading | async }" *ngIf="nextPageToken" (click)="next()">Load more...</a>
+  </div>
 </top-panel>
