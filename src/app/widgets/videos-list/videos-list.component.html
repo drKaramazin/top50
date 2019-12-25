@@ -1,6 +1,6 @@
 <top-panel>
   Search &nbsp;
-  <top-query (onSearch)="resultHolder($event)" (onClear)="getTopVideos()"></top-query>
+  <top-query (onSearch)="search($event)" (onClear)="clearSearch()"></top-query>
 </top-panel>
 
 <top-panel direction="column">
@@ -17,5 +17,5 @@
 </top-panel>
 
 <top-panel [centered]="true">
-  <a class="action" *ngIf="nextPageToken" (click)="next()">Load more...</a>
+  <a class="action" [ngClass]="{ disabled: loading | async }" *ngIf="nextPageToken" (click)="next()">Load more...</a>
 </top-panel>

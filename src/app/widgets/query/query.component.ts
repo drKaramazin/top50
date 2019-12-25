@@ -2,7 +2,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 import { YouTubeService } from '../../services/you-tube.service';
-import { Result } from '../../models/youtube/result';
+import { SearchResult } from '../../models/search-result';
 
 @Component({
   selector: 'top-query',
@@ -11,7 +11,7 @@ import { Result } from '../../models/youtube/result';
 })
 export class QueryComponent implements OnInit {
 
-  @Output() onSearch = new EventEmitter<Result>();
+  @Output() onSearch = new EventEmitter<SearchResult>();
   @Output() onClear = new EventEmitter();
 
   form: FormGroup;
@@ -29,7 +29,7 @@ export class QueryComponent implements OnInit {
   }
 
   search(query: string) {
-    this.youtube.searchVideos(query).then(resp => this.onSearch.emit(resp));
+    this.youtube.searchVideos(query).then(resp => this.onSearch.emit({ result: resp, query: this.form.controls.query.value }));
   }
 
   showClearButton() {
